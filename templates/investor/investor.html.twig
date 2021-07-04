@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+        <script>
+        $(document).ready(function() {
+            // you may need to change this code if you are not using Bootstrap Datepicker
+            $('.js-datepicker').datepicker({
+                format: 'dd/mm/yyyy'
+            });
+        });
+    </script>
+
+    <div id="wrapper">
+        <div id="container">
+            <div id="loanForm">
+                <h1>Add Investor</h1>
+
+                {{ form_start(form) }}
+                {{ form_widget(form, { 'attr': {'class': 'c4'} }) }}
+                {{ form_end(form) }}
+
+                {% if result is defined %}
+                    Result = {{ result }}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
