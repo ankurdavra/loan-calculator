@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Investor;
+use App\Entity\Loan;
 use App\Entity\Tranches;
 use App\Model\LoanCalculation;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -19,8 +20,12 @@ class InterestCalculationController extends AbstractController
     {
         $entityManager = $this->getDoctrine()->getManager();
 
-        $startDate ='2020-10-01';
-        $endDate = '2020-10-31';
+        $loan = new Loan();
+        $loan->setStartDate('2020-10-01');
+        $loan->setEndDate('2020-10-31');
+
+        $startDate = $loan->getStartDate();
+        $endDate = $loan->getEndDate();
 
         $interestCalculation = [];
 

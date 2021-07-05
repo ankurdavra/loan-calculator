@@ -20,12 +20,12 @@ class Loan
     /**
      * @ORM\Column(type="date")
      */
-    private $start_date = '01/10/2020';
+    private $start_date;
 
     /**
      * @ORM\Column(type="string", length="255")
      */
-    private $end_date = '15/11/2020';
+    private $end_date;
 
     public function getId(): ?int
     {
