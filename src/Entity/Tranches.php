@@ -85,7 +85,7 @@ class Tranches
         return $this;
     }
 
-    public function getInvestor(): int
+    public function getInvestor(): Investor
     {
         return $this->investor;
     }
