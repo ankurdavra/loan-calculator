@@ -34,11 +34,11 @@ class InterestCalculationController extends AbstractController
 
             $loanCalculation = new LoanCalculation($investor, $tranche);
 
-            $interestCalculation = $loanCalculation->calculateInterest($startDate, $endDate);
+            $interestCalculation[] = $loanCalculation->calculateInterest($startDate, $endDate);
         }
 
         return $this->render('interest/interest.html.twig', array(
-                    'result' => $interestCalculation
+                    'results' => $interestCalculation
                 )
             );
 

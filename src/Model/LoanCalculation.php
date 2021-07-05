@@ -24,7 +24,6 @@ class LoanCalculation implements EventInterface
 
     public function calculateInterest($startDate, $endDate)
     {
-       $interestData = [];
 
        $daysMonth = $this->getDaysInMonth($this->getMonth($startDate), $this->getYear($startDate));
 
@@ -39,7 +38,7 @@ class LoanCalculation implements EventInterface
 
        $earnedInterest = ($this->investor->getLoanAmount() / 100 * $investedPeriodInterestRate);
 
-       $interestData[] = $this->investor->getInvestorName() . ' recieves ' . $earnedInterest . ' in their wallet';
+       $interestData = $this->investor->getInvestorName() . ' recieves ' . $earnedInterest . ' in their wallet';
 
        return $interestData;
     }
@@ -60,7 +59,6 @@ class LoanCalculation implements EventInterface
 
     private function getDaysInMonth($month, $year): int
     {
-        var_dump($month);
         return cal_days_in_month(CAL_GREGORIAN,$month,$year);
     }
 }

@@ -8,9 +8,11 @@
                 {% if error is defined %}
                     {{ error }}
                 {% endif %}
-                {% if result is defined %}
-                    {{ result }}
-                {% endif %}
+                <ul>
+                {% for result in results %}
+                   <li> {{ result }}</li>
+                {% endfor %}
+                </ul>
             </div>
         </div>
     </div>
