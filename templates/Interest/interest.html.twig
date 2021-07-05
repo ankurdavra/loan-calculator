@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div id="wrapper">
+        <div id="container">
+            <div id="loanForm">
+                <h1>Interest Calculation between 01/10/2020 and 31/10/2020</h1>
+                {% if error is defined %}
+                    {{ error }}
+                {% endif %}
+                {% if result is defined %}
+                    {{ result }}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

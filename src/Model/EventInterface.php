@@ -4,5 +4,7 @@ namespace App\Model;
 
 interface EventInterface
 {
-    public function calculate();
+    public function loanMaxAmount();
+
+    public function calculateInterest($startDate, $endDate);
 }

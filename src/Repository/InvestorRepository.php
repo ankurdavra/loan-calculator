@@ -19,22 +19,22 @@ class InvestorRepository extends ServiceEntityRepository
         parent::__construct($registry, Investor::class);
     }
 
-    // /**
-    //  * @return Investor[] Returns an array of Investor objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function findInvestorByDate($start_date, $end_date)
     {
-        return $this->createQueryBuilder('i')
-            ->andWhere('i.exampleField = :val')
-            ->setParameter('val', $value)
+        $tranche = $this->createQueryBuilder('i')
+            ->andWhere('i.loan_start_date >= :sdate')
+            ->andWhere('i.loan_start_date <= :edate')
+            ->setParameter('sdate', $start_date)
+            ->setParameter('edate', $end_date)
             ->orderBy('i.id', 'ASC')
             ->setMaxResults(10)
             ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
+
+        return $tranche;
+
     }
-    */
+
 
     /*
     public function findOneBySomeField($value): ?Investor

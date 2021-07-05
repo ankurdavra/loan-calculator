@@ -6,7 +6,7 @@ use App\Entity\EntityHelper\CreateInvestorRequest;
 use App\Entity\Investor;
 use App\Entity\Tranches;
 use App\Form\InvestorForm;
-use App\Model\LoanMaxAmount;
+use App\Model\LoanCalculation;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,7 +25,7 @@ class InvestorController extends AbstractController
         $createInvestorRequest = new CreateInvestorRequest();
         $investor = new Investor();
         $tranche = new Tranches();
-        $loanMaxAmount = new LoanMaxAmount($investor, $tranche);
+        $loanCalculation = new LoanCalculation($investor, $tranche);
         $form = $this->createForm(InvestorForm::class, $createInvestorRequest);
         $form->handleRequest($request);
 
@@ -34,11 +34,6 @@ class InvestorController extends AbstractController
             $investor->setInvestorName($createInvestorRequest->investor_name);
             $investor->setLoanAmount($createInvestorRequest->loan_amount);
             $investor->setLoanStartDate($createInvestorRequest->loan_start_date);
-
-            $tranche->setTrancheType($createInvestorRequest->tranche_type);
-            $tranche->setMaxAmount($loanMaxAmount->calculate());
-            $tranche->setInterestType($tranche->getInterestType());
-
             $result = $entityManager->getRepository(Tranches::class)
                 ->findMaxAmountByTrancheType($createInvestorRequest->tranche_type);
 
@@ -56,8 +51,20 @@ class InvestorController extends AbstractController
             }
 
             $entityManager->persist($investor);
+            $entityManager->flush();
+
+            $tranche->setInvestor($investor);
+            $tranche->setTrancheType($createInvestorRequest->tranche_type);
+            $tranche->setMaxAmount($loanCalculation->loanMaxAmount());
+            $tranche->setInterestType($tranche->getInterestType());
+
             $entityManager->persist($tranche);
             $entityManager->flush();
+
+            unset($createInvestorRequest);
+            unset($form);
+            $createInvestorRequest = new CreateInvestorRequest();
+            $form = $this->createForm(InvestorForm::class, $createInvestorRequest);
 
             return $this->render('investor/investor.html.twig', array(
                     'form' => $form->createView(),

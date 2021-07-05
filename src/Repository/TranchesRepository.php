@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Investor;
 use App\Entity\Tranches;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -26,6 +27,22 @@ class TranchesRepository extends ServiceEntityRepository
             ->setParameter('val', $value)
             ->getQuery()
             ->getOneOrNullResult();
+    }
+
+    public function findTrunchesByInvestor(Investor $i)
+    {
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'SELECT t
+            FROM App\Entity\Tranches t
+            WHERE t.investor = :investor
+            ORDER BY t.id DESC'
+        )->setParameter('investor', $i->getId());
+
+        $data = $query->getResult();
+
+        return $data[0];
     }
 
 }

@@ -32,6 +32,12 @@ class Tranches
      */
     private $maxAmount = 1000;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Investor::class, inversedBy="Tranches")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $investor;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -77,5 +83,15 @@ class Tranches
         $this->maxAmount = $maxAmount;
 
         return $this;
+    }
+
+    public function getInvestor(): int
+    {
+        return $this->investor;
+    }
+
+    public function setInvestor(Investor $investor): void
+    {
+        $this->investor = $investor;
     }
 }
