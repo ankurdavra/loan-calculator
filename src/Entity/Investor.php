@@ -28,6 +28,11 @@ class Investor
     private $wallet = 1000;
 
     /**
+     * @ORM\Column(type="float")
+     */
+    private $loan_amount;
+
+    /**
      * @ORM\Column(type="date")
      */
     private $loan_start_date;
@@ -61,13 +66,26 @@ class Investor
         return $this;
     }
 
+    public function getLoanAmount()
+    {
+        return $this->loan_amount;
+    }
+
+    public function setLoanAmount($loan_amount): void
+    {
+        $this->loan_amount = $loan_amount;
+    }
+
     public function getLoanStartDate(): ?\DateTimeInterface
     {
         return $this->loan_start_date;
     }
 
-    public function setLoanStartDate(\DateTimeInterface $loan_start_date): void
+    public function setLoanStartDate(?\DateTimeInterface $loan_start_date): self
     {
         $this->loan_start_date = $loan_start_date;
+
+        return $this;
     }
+
 }

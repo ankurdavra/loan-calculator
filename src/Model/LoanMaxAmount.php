@@ -2,11 +2,10 @@
 
 namespace App\Model;
 
-
 use App\Entity\Investor;
 use App\Entity\Tranches;
 
-class AddInvestor
+class LoanMaxAmount implements EventInterface
 {
     private $investor;
 
@@ -18,9 +17,8 @@ class AddInvestor
        $this->tranche = $tranche;
     }
 
-    public function add()
+    public function calculate()
     {
-
-
+       return ($this->tranche->getMaxAmount() - $this->investor->getLoanAmount());
     }
 }

@@ -56,11 +56,11 @@ class Tranches
 
     public function setInterestType($interestType): void
     {
-        if ($interestType == 'A') {
+        if ($this->getTrancheType() == 'A') {
             $interestType = 3;
         }
 
-        if ($interestType == 'B') {
+        if ($this->getTrancheType() == 'B') {
             $interestType = 6;
         }
 

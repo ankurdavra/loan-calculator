@@ -19,32 +19,13 @@ class TranchesRepository extends ServiceEntityRepository
         parent::__construct($registry, Tranches::class);
     }
 
-    // /**
-    //  * @return Tranches[] Returns an array of Tranches objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function findMaxAmountByTrancheType($value): ?Tranches
     {
         return $this->createQueryBuilder('t')
-            ->andWhere('t.exampleField = :val')
+            ->andWhere('t.tranche_type = :val')
             ->setParameter('val', $value)
-            ->orderBy('t.id', 'ASC')
-            ->setMaxResults(10)
             ->getQuery()
-            ->getResult()
-        ;
+            ->getOneOrNullResult();
     }
-    */
 
-    /*
-    public function findOneBySomeField($value): ?Tranches
-    {
-        return $this->createQueryBuilder('t')
-            ->andWhere('t.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }

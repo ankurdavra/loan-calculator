@@ -14,13 +14,15 @@
         <div id="container">
             <div id="loanForm">
                 <h1>Add Investor</h1>
-
+                {% if error is defined %}
+                    {{ error }}
+                {% endif %}
                 {{ form_start(form) }}
                 {{ form_widget(form, { 'attr': {'class': 'c4'} }) }}
                 {{ form_end(form) }}
 
                 {% if result is defined %}
-                    Result = {{ result }}
+                     {{ result }}
                 {% endif %}
             </div>
         </div>

@@ -20,36 +20,36 @@ class Loan
     /**
      * @ORM\Column(type="date")
      */
-    private $start_date;
+    private $start_date = '01/10/2020';
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="string", length="255")
      */
-    private $end_date;
+    private $end_date = '15/11/2020';
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getStartDate(): ?\DateTimeInterface
+    public function getStartDate(): ?string
     {
         return $this->start_date;
     }
 
-    public function setStartDate(\DateTimeInterface $start_date): self
+    public function setStartDate(?string $start_date): self
     {
         $this->start_date = $start_date;
 
         return $this;
     }
 
-    public function getEndDate(): ?\DateTimeInterface
+    public function getEndDate(): ?string
     {
         return $this->end_date;
     }
 
-    public function setEndDate(\DateTimeInterface $end_date): self
+    public function setEndDate(?string $end_date): self
     {
         $this->end_date = $end_date;
 

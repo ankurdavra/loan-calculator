@@ -27,6 +27,7 @@ class InvestorForm extends AbstractType
                     'B' => 'B'
                 )
             ))
+            ->add('loan_amount')
            ->add('loan_start_date', DateType::class, [
                // renders it as a single text box
                'widget' => 'single_text',
